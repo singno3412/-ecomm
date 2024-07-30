@@ -42,6 +42,7 @@ const Page: React.FC = () => {
         <button onClick={() => signOut()}>Sign Out</button>
         <button onClick={() => setModalOpen(true)}>Open Modal</button>
         <a href='/createapp'>Go create APp</a>
+        <a href='/blog'>Go create Blog</a>
         <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
           
       </>
