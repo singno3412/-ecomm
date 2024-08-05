@@ -1,92 +1,134 @@
-// Modal.js
+"use client";
+
+import { UploadButton } from "../utils/uploadthing";
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+
+const MySwal = withReactContent(Swal)
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
 
 const Modal = ({ isOpen, onClose }) => {
   const { data: session } = useSession();
   const [tile, setTitle] = useState('');
   const [cont, setContent] = useState('');
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const [userType, setUserType] = useState('Seller');
 
   const handleUpload = async () => {
     if (!session) {
-      alert('You must be logged in to upload');
+      Swal.fire('Error', 'You must be logged in to upload', 'error');
       return;
     }
-    
-    const userId = session.user?.email
-    const title = tile
-    const content = cont
-    console.log({userId,tile,content})
+
+    if (!tile || !cont || !uploadedImage) {
+      Swal.fire('Error', 'Title , Content and Image are required', 'error');
+      return;
+    }
+
+    const userId = session.user?.email;
+    const title = tile;
+    const content = cont;
+    console.log({ userId, title, content, userType });
     const response = await fetch('/api/yedhe1/yedhe2', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({userId,title,content}),
+      body: JSON.stringify({ userId, title, content, uploadedImage, userType }),
     });
 
     if (response.ok) {
-      alert('Upload successful');
+      Toast.fire('Success', 'Upload successful', 'success');
       onClose();
     } else {
-      alert('Upload failed');
+      Swal.fire('Error', 'Upload failed', 'error');
     }
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <span className="close" onClick={onClose}>&times;</span>
-        <h2>Upload Data</h2>
-        <input
-          type="text"
-          placeholder="Title"
-          value={tile}
-          onChange={(e) => setTitle(e.target.value)}
+    <div className="modal modal-open">
+      <div className="modal-box">
+        <button className="btn btn-sm btn-circle absolute right-2 top-2" onClick={onClose}>✕</button>
+        <h2 className="font-bold text-lg mb-4">Upload Data</h2>
+        <div className="form-control mb-4">
+          <label className="label">
+            <span className="label-text">Title</span>
+          </label>
+          <input
+            required
+            type="text"
+            placeholder="Title"
+            value={tile}
+            onChange={(e) => setTitle(e.target.value)}
+            className="input input-bordered w-full"
+          />
+        </div>
+        <div className="form-control mb-4">
+          <label className="label">
+            <span className="label-text">Content</span>
+          </label>
+          <textarea
+            required
+            placeholder="Content"
+            value={cont}
+            onChange={(e) => setContent(e.target.value)}
+            className="textarea textarea-bordered w-full"
+          ></textarea>
+        </div>
+        <div className=""> Type
+          <label className="swap ml-3 items-baseline bg-white p-1.5 bg-opacity-5 rounded-xl">
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                const newType = e.target.checked ? 'Buyer' : 'Seller';
+                setUserType(newType);
+                console.log(newType);
+              }}
+            />
+            <div className="swap-on">Buyer</div>
+            <div className="swap-off">Seller</div>
+          </label>
+        </div>
+        {uploadedImage && (
+          <div className="mt-4 mb-4 p-3">
+            <img src={uploadedImage} alt="Uploaded" className="w-full rounded-md h-72"/>
+          </div>
+        )}
+        <UploadButton
+          endpoint="imageUploader"
+          onClientUploadComplete={(res) => {
+            console.log("Files: ", res);
+            Toast.fire({
+              icon: "success",
+              title: "Upload Success"
+            });
+            setUploadedImage(res[0]?.url);
+          }}
+          onUploadError={(error) => {
+            Toast.fire({
+              icon: "error",
+              title: `Upload Failed ${error}`
+            });
+          }}
         />
-        <textarea
-          placeholder="Content"
-          value={cont}
-          onChange={(e) => setContent(e.target.value)}
-        ></textarea>
-        <button onClick={handleUpload}>Upload</button>
+        <div className="modal-action">
+          <button onClick={handleUpload} className="btn btn-primary">Upload</button>
+        </div>
       </div>
-      <style jsx>{`
-        .modal {
-          display: block;
-          position: fixed;
-          z-index: 1;
-          padding-top: 100px;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: 100%;
-          overflow: auto;
-          background-color: rgb(0,0,0);
-          background-color: rgba(0,0,0,0.4);
-        }
-        .modal-content {
-          background-color: #fefefe;
-          margin: auto;
-          padding: 20px;
-          border: 1px solid #888;
-          width: 80%;
-        }
-        .close {
-          color: #aaa;
-          float: right;
-          font-size: 28px;
-          font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-          color: black;
-          text-decoration: none;
-          cursor: pointer;
-        }
-      `}</style>
     </div>
   );
 };

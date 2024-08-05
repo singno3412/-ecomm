@@ -29,17 +29,21 @@ export default function Page({ params }) {
   }
 
   if (!data) {
-    return <div>Loading...</div>;
+    return <div>      <div className="flex w-full h-screen flex-col gap-4">
+    <div className="skeleton h-32 w-full"></div>
+    <div className="skeleton h-4 w-28"></div>
+    <div className="skeleton h-4 w-full"></div>
+    <div className="skeleton h-4 w-full"></div>
+  </div></div>;
   }
   return (
     <div>
-      <h1>Normal Page {params.slug}</h1>
       <div className="card-container">
         {data.map(item => (
-          <a key={item.id} href={`/blog/${item.id}`} className="card">
+          <a key={item.id} className="card">
             <div>
-              <h2>{item.title}</h2>
-              <p>{item.content}</p>
+              <h1 className='text-xl'>{item.title}</h1>
+              <text>{item.content}</text>
             </div>
           </a>
         ))}

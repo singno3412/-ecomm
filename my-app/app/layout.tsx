@@ -17,8 +17,57 @@ interface Props {
 const RootLayout: React.FC<Props> = ({ children }) => {
   return (
     <SessionWrapper>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
+      <html lang="en" data-theme="coffee">
+        <body className={inter.className}>
+        <div className="navbar bg-base-100">
+  <div className="flex-1">
+    <a className="btn btn-ghost text-xl" href='/'>E-Comm | LOCAL</a>
+  </div>
+  <div className="flex-none">
+    <div className="dropdown dropdown-end relative">
+      <button tabIndex={-1} className="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+      </button>
+      <ul tabIndex={-1} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-50">
+        <li><a href='/createapp'>Create Chat</a></li>
+        <li><a href='/blog'>Blogs</a></li>
+        <li><a href=''>Link</a></li>
+        <li>
+          <details>
+            <summary>Parent</summary>
+            <ul className="bg-base-100 rounded-t-none p-2">
+              <li><a href='/profile'>Profile</a></li>
+              <li><a>SignOut</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </div>
+    <ul className="menu menu-horizontal px-1 hidden lg:flex">
+      <li><a href='/createapp'>Create Chat</a></li>
+      <li><a href='/blog'>Blogs</a></li>
+      <li><a href=''>Link</a></li>
+      <li>
+        <details>
+          <summary>Parent</summary>
+          <ul className="bg-base-100 rounded-t-none p-2">
+            <li><a href='/profile'>Profile</a></li>
+            <li><a>SignOut</a></li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+        <div className='container  mx-auto px-4'>
+          {children}
+          </div>
+          <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
+          </body>
       </html>
     </SessionWrapper>
   );

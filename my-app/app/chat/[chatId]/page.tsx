@@ -60,17 +60,20 @@ export default function ChatPage() {
       <div>
         <h1>Chat Room: {chatId}</h1>
         <p>Users in room: {userCount}</p>
-        <div>
+        <div className="chat">
+          <div className="chat-bubble">
           {messages.map((msg, index) => (
             <div key={index}><strong>{msg.username}:</strong> {msg.message}</div>
           ))}
+          </div>
         </div>
         <input
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          className='input input-bordered w-full max-w-xs'
           onKeyPress={(e) => e.key === 'Enter' ? sendMessage() : null}
         />
-        <button onClick={sendMessage}>Send</button>
+        <button className="btn btn-secondary" onClick={sendMessage}>Send</button>
       </div>
     );
   }

@@ -24,7 +24,7 @@ export async function POST(request) {
     try {
         const promisePool = connection.promise();
         const body = await request.json(); // Get the body of the POST request
-        await promisePool.query(`INSERT INTO posts (user_id,title,content) VALUES (?, ?, ?)`, [body.userId, body.title, body.content]);
+        await promisePool.query(`INSERT INTO posts (user_id,title,content, image, type) VALUES (?, ?, ?, ?, ?)`, [body.userId, body.title, body.content, body.uploadedImage, body.userType]);
         const [rows] = await promisePool.query(`SELECT * FROM posts;`);
 
         // Return the fetched rows as JSON

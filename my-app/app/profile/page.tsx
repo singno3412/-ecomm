@@ -42,10 +42,15 @@ const Page: React.FC = () => {
     const content =  String(randomBytes(256));
     return (
       <>
-            <div className=''>
-                <h1 className='text-xl'>Hottest Blog</h1>
-            </div> 
-                 </>
+ 
+            Signed in as {session.user?.email} {session.user?.id}<br />
+            <button className="btn btn-active btn-primary" onClick={() => signOut()}>Sign Out</button>
+            <button className="btn btn-active btn-primary" onClick={() => setModalOpen(true)}>Open Modal</button>
+            <a href='/createapp'><button className="btn btn-active btn-primary">Go create APP</button></a>
+            <a href='/blog'><button className="btn btn-active btn-primary">Go create Blog</button></a>
+            <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+            <button data-act-class="shadow-outline" data-set-theme="light" class="bg-green-700 focus:outline-none m-1 rounded p-2">🐬 Blue</button>
+      </>
     );
   }
 
