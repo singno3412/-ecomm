@@ -9,7 +9,7 @@ export default function Page() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/yedhe1');
+        const response = await fetch('http://localhost:3000/api/getSeller');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

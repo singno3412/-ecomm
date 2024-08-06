@@ -23,42 +23,26 @@ USE `next-js-registration-login-example`;
 CREATE TABLE IF NOT EXISTS `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `chatId` varchar(255) NOT NULL,
+  `owner` varchar(255) NOT NULL,
+  `contacter` varchar(255) NOT NULL,
+  `blogId` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table next-js-registration-login-example.messages: ~28 rows (approximately)
-INSERT INTO `messages` (`id`, `chatId`, `username`, `message`, `timestamp`) VALUES
-	(13, '2d35a562-c69d-4ba2-bc82-366369471198', 'User-6b420015', 'asd', '2024-07-30 15:50:37'),
-	(14, '2d35a562-c69d-4ba2-bc82-366369471198', 'User-b03917db', 'asd', '2024-07-30 15:51:31'),
-	(15, '2d35a562-c69d-4ba2-bc82-366369471198', 'User-b03917db', 'dsa', '2024-07-30 15:51:32'),
-	(16, '2d35a562-c69d-4ba2-bc82-366369471198', 'User-b03917db', 'asd', '2024-07-30 15:51:33'),
-	(17, '2d35a562-c69d-4ba2-bc82-366369471198', 'User-e49a2095', 'asdsad', '2024-07-30 15:51:49'),
-	(18, '2d35a562-c69d-4ba2-bc82-366369471198', 'User-90776c44', 'aedea', '2024-07-30 15:51:59'),
-	(19, 'c798cdf0-9c9c-4a09-8d9a-055b5739d1c4', 'User-d53e0d91', 'asd', '2024-07-30 15:59:47'),
-	(20, 'c798cdf0-9c9c-4a09-8d9a-055b5739d1c4', 'User-7b5998bc', 'asd', '2024-07-30 16:00:23'),
-	(21, 'c798cdf0-9c9c-4a09-8d9a-055b5739d1c4', 'User-7b5998bc', 'dsa', '2024-07-30 16:00:24'),
-	(22, 'c798cdf0-9c9c-4a09-8d9a-055b5739d1c4', 'User-1f16df4a', 'dsa', '2024-07-30 16:00:40'),
-	(23, 'c798cdf0-9c9c-4a09-8d9a-055b5739d1c4', 'User-14501a5c', 'asd', '2024-07-30 16:03:29'),
-	(24, 'c798cdf0-9c9c-4a09-8d9a-055b5739d1c4', 'rattanan2006s@gmail.com', 'dsa', '2024-07-30 16:08:08'),
-	(25, 'c798cdf0-9c9c-4a09-8d9a-055b5739d1c4', 'rattanan2006s@gmail.com', 'asd', '2024-07-30 16:08:09'),
-	(26, 'c798cdf0-9c9c-4a09-8d9a-055b5739d1c4', 'rattanan2006s@gmail.com', 'asd', '2024-07-30 16:08:33'),
-	(27, 'e75c94d2-a2c9-4b19-ae70-e0e09be39174', 'rattanan2006s@gmail.com', 'asd', '2024-08-02 17:02:20'),
-	(28, 'e75c94d2-a2c9-4b19-ae70-e0e09be39174', 'rattanan2006s@gmail.com', 'asd', '2024-08-02 17:04:09'),
-	(29, 'e75c94d2-a2c9-4b19-ae70-e0e09be39174', 'rattanan2006s@gmail.com', 'Hello', '2024-08-02 17:04:11'),
-	(30, 'e75c94d2-a2c9-4b19-ae70-e0e09be39174', 'rattanan2006s@gmail.com', 'asd', '2024-08-02 17:04:42'),
-	(31, 'e75c94d2-a2c9-4b19-ae70-e0e09be39174', 'rattanan2006s@gmail.com', 'asd', '2024-08-02 17:04:56'),
-	(32, 'e75c94d2-a2c9-4b19-ae70-e0e09be39174', 'rattanan2006s@gmail.com', 'dsa', '2024-08-02 17:04:57'),
-	(33, '03fda603-eaaf-4c40-8575-2b19bd4372d8', 'rattanan2006s@gmail.com', 'dsa', '2024-08-02 17:17:40'),
-	(34, '03fda603-eaaf-4c40-8575-2b19bd4372d8', 'rattanan2006s@gmail.com', 'hello', '2024-08-02 17:17:43'),
-	(35, '03fda603-eaaf-4c40-8575-2b19bd4372d8', 'rattanan2006s@gmail.com', 'Hi', '2024-08-02 17:17:44'),
-	(36, 'c36dcfe9-4c43-4fc2-81e8-a8adcdb1a8af', 'rattanan2006s@gmail.com', 'Hello', '2024-08-02 17:20:01'),
-	(37, 'c36dcfe9-4c43-4fc2-81e8-a8adcdb1a8af', 'rattanan2006s@gmail.com', 'Hi', '2024-08-02 17:20:03'),
-	(38, '64ddc49e-98f3-421a-8c40-461bebc7a9e1', 'rattanan2006s@gmail.com', 'das', '2024-08-03 07:25:11'),
-	(39, '64ddc49e-98f3-421a-8c40-461bebc7a9e1', 'rattanan2006s@gmail.com', 'hge', '2024-08-03 07:25:12'),
-	(40, 'c0aded64-1d7d-4a5a-9218-174c1bdac66b', 'rattanan2006s@gmail.com', 'Hello', '2024-08-03 13:10:44');
+-- Dumping data for table next-js-registration-login-example.messages: ~0 rows (approximately)
+INSERT INTO `messages` (`id`, `chatId`, `owner`, `contacter`, `blogId`, `username`, `message`, `timestamp`) VALUES
+	(72, '1a4cb098-0bb4-442e-8bf5-108a49512dfd', 'rattanan2006s@gmail.com', 'dkzkai12@gmail.com', 56, 'dkzkai12@gmail.com', 'ทักครับสนใจครับ', '2024-08-06 15:07:05'),
+	(73, '1a4cb098-0bb4-442e-8bf5-108a49512dfd', 'rattanan2006s@gmail.com', 'rattanan2006s@gmail.com', 56, 'rattanan2006s@gmail.com', 'Hello', '2024-08-06 15:46:22'),
+	(74, '1a4cb098-0bb4-442e-8bf5-108a49512dfd', 'rattanan2006s@gmail.com', 'rattanan2006s@gmail.com', 56, 'rattanan2006s@gmail.com', 'ฉันต้องการคุณ', '2024-08-06 15:46:29'),
+	(75, '1a4cb098-0bb4-442e-8bf5-108a49512dfd', 'rattanan2006s@gmail.com', 'rattanan2006s@gmail.com', 56, 'rattanan2006s@gmail.com', 'ปีศาจ', '2024-08-06 15:46:34'),
+	(76, '1a4cb098-0bb4-442e-8bf5-108a49512dfd', 'rattanan2006s@gmail.com', 'rattanan2006s@gmail.com', 56, 'rattanan2006s@gmail.com', 'dog', '2024-08-06 15:46:47'),
+	(77, '1a4cb098-0bb4-442e-8bf5-108a49512dfd', 'rattanan2006s@gmail.com', 'rattanan2006s@gmail.com', 56, 'rattanan2006s@gmail.com', 'โลก', '2024-08-06 15:46:56'),
+	(78, '576920c4-196d-4762-aef9-8e6b35890948', 'rattanan2006s@gmail.com', 'rattanan2006s@gmail.com', 56, 'rattanan2006s@gmail.com', 'Helloasdasdas', '2024-08-06 16:07:55'),
+	(79, '576920c4-196d-4762-aef9-8e6b35890948', 'rattanan2006s@gmail.com', 'rattanan2006s@gmail.com', 56, 'rattanan2006s@gmail.com', 'dasdasdasdsad', '2024-08-06 16:07:56'),
+	(80, '576920c4-196d-4762-aef9-8e6b35890948', 'rattanan2006s@gmail.com', 'rattanan2006s@gmail.com', 56, 'rattanan2006s@gmail.com', 'sadas', '2024-08-06 16:07:57');
 
 -- Dumping structure for table next-js-registration-login-example.posts
 CREATE TABLE IF NOT EXISTS `posts` (
@@ -69,15 +53,12 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `image` text NOT NULL,
   `type` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table next-js-registration-login-example.posts: ~5 rows (approximately)
+-- Dumping data for table next-js-registration-login-example.posts: ~2 rows (approximately)
 INSERT INTO `posts` (`id`, `user_id`, `title`, `content`, `image`, `type`) VALUES
-	(50, 'rattanan2006s@gmail.com', 'dsa2asd2', 'Csa2awe2', 'https://utfs.io/f/a29a79b4-e3a2-439a-a976-a65c846d6d0d-xl3rkp.jpg', 'Buyer'),
-	(51, 'rattanan2006s@gmail.com', 'dsa2asd2', 'Csa2awe2', 'https://utfs.io/f/a29a79b4-e3a2-439a-a976-a65c846d6d0d-xl3rkp.jpg', 'Buyer'),
-	(52, 'rattanan2006s@gmail.com', 'dsa2asd2', 'Csa2awe2', 'https://utfs.io/f/a29a79b4-e3a2-439a-a976-a65c846d6d0d-xl3rkp.jpg', 'Seller'),
-	(53, 'rattanan2006s@gmail.com', 'dsacv2', '12c4e1231', 'https://utfs.io/f/ad6e301e-f7bb-4269-ab61-c3c8a014c63e-m4v0xo.jpg', 'Buyer'),
-	(54, 'rattanan2006s@gmail.com', 'cda21xc', '3e12cx3e21ceszc2ac', 'https://utfs.io/f/c8832219-eef0-4dbe-a131-e79da1dbc9f0-cmnnru.png', 'Seller');
+	(55, 'dkzkai12@gmail.com', 'รับตอกโหดๆปลาหมอคางดำยังกลัวเพราะพี่มาราคา 50 ทรู', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus id voluptates atque, magni cum saepe possimus! Cupiditate quos magnam, dicta, accusamus nisi vitae sunt rem amet quam optio sint beatae!', 'https://utfs.io/f/aa7d671e-f1cd-48e5-aeda-f6ed50ac3257-rvb169.png', 'Seller'),
+	(56, 'rattanan2006s@gmail.com', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus id voluptates atque, magni cum saepe possimus! Cupiditate quos magnam, dicta, accusamus nisi vitae sunt rem amet quam optio sint beatae!', 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus id voluptates atque, magni cum saepe possimus! Cupiditate quos magnam, dicta, accusamus nisi vitae sunt rem amet quam optio sint beatae!', 'https://utfs.io/f/21da8765-821a-40dd-924b-40140524fd4d-2uska6.jpg', 'Buyer');
 
 -- Dumping structure for table next-js-registration-login-example.sessions
 CREATE TABLE IF NOT EXISTS `sessions` (
@@ -100,14 +81,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table next-js-registration-login-example.users: ~4 rows (approximately)
+-- Dumping data for table next-js-registration-login-example.users: ~5 rows (approximately)
 INSERT INTO `users` (`id`, `name`, `email`) VALUES
 	(1, 'kenkenedy', 'rattanan2006s@gmail.com'),
 	(2, 'Anonymous', 'karn.yong@melivecode.com'),
 	(3, 'Asdasd', 'Dasdasd'),
-	(4, 'abc', 'def');
+	(4, 'abc', 'def'),
+	(5, 'kenniethedestroyer', 'dkzkai12@gmail.com');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

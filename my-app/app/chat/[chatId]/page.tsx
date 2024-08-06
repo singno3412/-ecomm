@@ -1,13 +1,13 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
 import io from 'socket.io-client';
 import { useSession, signIn, signOut } from 'next-auth/react';
-
 let socket;
 
 export default function ChatPage() {
+  const searchParams = useSearchParams()
   const { chatId } = useParams();
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -17,7 +17,6 @@ export default function ChatPage() {
   useEffect(() => {
     console.log('Connecting to socket...');
     socket = io('http://localhost:3000'); // URL ของเซิร์ฟเวอร์ Socket.IO
-
     socket.on('connect', () => {
       console.log('Socket connected');
       socket.emit('join', chatId);
@@ -28,7 +27,7 @@ export default function ChatPage() {
     });
 
     socket.on('message', (data) => {
-      console.log('Message received =>:', data); // Debug log
+      console.log('Message received:', data); // Debug log
       setMessages((prevMessages) => [...prevMessages, data]);
     });
 
@@ -46,11 +45,13 @@ export default function ChatPage() {
   }, [chatId]);
 
   if (session) {
+    const owner = searchParams.get('owner');
+    const blogId = searchParams.get('blog_id');
     const sendMessage = () => {
       const userId = session.user?.email;
       if (socket && message.trim()) {
         console.log('Sending message:', message); // Debug log
-        socket.emit('sendMessage', { chatId, username: userId, message }, () => {
+        socket.emit('sendMessage', { chatId, owner, blogId, username: userId,  message }, () => {
           setMessage('');
         });
       }
@@ -60,11 +61,12 @@ export default function ChatPage() {
       <div>
         <h1>Chat Room: {chatId}</h1>
         <p>Users in room: {userCount}</p>
+        <p>Chat Detail Owner: {searchParams.get('owner')} Contacter: {searchParams.get('contacter')} blog_ID: {searchParams.get('blog_id')}</p>
         <div className="chat">
           <div className="chat-bubble">
-          {messages.map((msg, index) => (
-            <div key={index}><strong>{msg.username}:</strong> {msg.message}</div>
-          ))}
+            {messages.map((msg, index) => (
+              <div key={index}><strong>{msg.username}:</strong> {msg.message}</div>
+            ))}
           </div>
         </div>
         <input
@@ -79,6 +81,9 @@ export default function ChatPage() {
   }
 
   return (
-    <><h1>Please LOGIN</h1></>
+    <div>
+      <h1>Please LOGIN</h1>
+      <button onClick={signIn}>Sign in</button>
+    </div>
   );
 }

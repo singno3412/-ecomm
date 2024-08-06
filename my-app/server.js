@@ -66,14 +66,14 @@ app.prepare().then(async () => {
     });
 
     socket.on('sendMessage', async (data, callback) => {
-      const { chatId, username, message } = data;
+      const { chatId, owner, blogId, username, message } = data;
       console.log(`Message received from ${username}: ${message}`);
 
       const messageText = typeof message === 'object' ? message.message : message;
 
       const [result] = await dbConnection.execute(
-        'INSERT INTO messages (chatId, username, message) VALUES (?, ?, ?)',
-        [chatId, username, messageText]
+        'INSERT INTO messages (chatId, owner, contacter, blogId, username, message) VALUES (?, ?, ?, ?, ?, ?)',
+        [chatId, owner, username, blogId, username, messageText]
       );
 
       const newMessage = {
