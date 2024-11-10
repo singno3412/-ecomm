@@ -44,6 +44,7 @@ const Page: React.FC = () => {
       <>
             <div className=''>
                 <h1 className='text-xl'>Hottest Blog</h1>
+                
             </div> 
                  </>
     );

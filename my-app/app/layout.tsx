@@ -36,7 +36,7 @@ const RootLayout: React.FC<Props> = ({ children }) => {
                   <ul tabIndex={-1} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-50">
                     <li><a href='/createapp'>Create Chat</a></li>
                     <li><a href='/blog'>Blogs</a></li>
-                    <li><a href=''>Link</a></li>
+                    <li><a href='/inbox'>Inbox</a></li>
                     <li>
                       <details>
                         <summary>Parent</summary>
